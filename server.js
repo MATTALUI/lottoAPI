@@ -1,6 +1,15 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 const express = require('express');
 const app = express();
 const htmlToJson = require('html-to-json');
+const loginRoute = require('./routes/login.js');
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use('/login', loginRoute);
 
 app.get('/winning-numbers', function(req,res,next){
   htmlToJson.request('http://invoice.etax.nat.gov.tw/', {
@@ -24,6 +33,12 @@ app.get('/winning-numbers', function(req,res,next){
   });
 });
 
-app.listen(8000, ()=>{
-  console.log('listening on 8000');
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(8000,'192.168.1.75', ()=>{
+    console.log('listening on ', '192.168.1.75:8000');
+  });
+} else{
+  app.listen(8000,()=>{
+    console.log('listening on :8000');
+  });
+}

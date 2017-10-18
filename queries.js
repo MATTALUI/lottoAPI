@@ -6,9 +6,15 @@ module.exports.getUserInfo = function(username){
   .first()
   .then((userInfo)=>{
     if(userInfo){
-      return userInfo;
+      return userInfo.password;
     }else{
       return null;
     }
   });
+}
+module.exports.getUsersReceipts = function(userId){
+  return knex('receipts')
+  .where('user_id', userId)
+  .returning('*')
+  .then(receipts=>receipts);
 }

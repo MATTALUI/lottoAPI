@@ -9,6 +9,7 @@ router.get('/', function(req,res,next){
 });
 
 router.post('/', function(req,res,next){
+  console.log('logging in');
   queries.getUserInfo(req.body.username).then((userInfo)=>{
     if(userInfo){
       bcrypt.compare(req.body.password,userInfo.password,(err, match)=>{

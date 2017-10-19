@@ -6,7 +6,7 @@ module.exports.getUserInfo = function(username){
   .first()
   .then((userInfo)=>{
     if(userInfo){
-      return userInfo.password;
+      return userInfo;
     }else{
       return null;
     }

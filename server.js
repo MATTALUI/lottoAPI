@@ -1,6 +1,4 @@
-// if (process.argv[2]){
-//   console.log(process.argv[2]);
-// }
+
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
@@ -38,7 +36,7 @@ app.get('/winning-numbers', function(req,res,next){
     res.send(winningScores);
   });
 });
-// console.log(process.argv[2]);
+
 if (process.env.NODE_ENV == 'production' || process.argv[2] =='localhost') {
   app.listen(8000,()=>{
     console.log('listening on :8000');
